@@ -17,6 +17,8 @@ ln -s en build/current_lang
 
 cd standard
 sphinx-build -b dirhtml docs/en ../build/en
+sphinx-build -b singlehtml docs/en ../build/singlehtml/en
+sphinx-build -b latex docs/en ../build/latex/en
 sphinx-build -b gettext docs/en ../build/locale
 
 pybabel extract -F .babel_schema . -o ../build/locale/schema.pot
@@ -34,6 +36,7 @@ for lang in es fr; do
     rm ../build/current_lang
     ln -s ../build/$lang ../build/current_lang
     sphinx-build -b dirhtml -D language="$lang" docs/en ../build/$lang
+    sphinx-build -b singlehtml -D language="$lang" docs/en ../build/singlehtml/$lang
 done
 
 # Our deploy script doesn't like it if this still exists
